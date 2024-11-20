@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const allowedGenders = ["M", "F", "L", "G", "T", "not specified"];
 
 const UserSchema = new mongoose.Schema(
   {
@@ -20,13 +19,6 @@ const UserSchema = new mongoose.Schema(
     dob: {
       type: Date,
       required: true,
-    },
-
-    gender: {
-      type: String,
-      enum: allowedGenders,
-      required: false,
-      default: "not specified",
     },
 
     username: {

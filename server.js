@@ -1,9 +1,10 @@
 const express = require("express");
-const app = express();
+const init = require("./db");
 const PORT = 4600;
+const server = express();
 
-app.get("/", (req, res) => {
-  res.send("Server attivo!");
-});
+//middleware
+server.use(express.json());
 
-app.listen(PORT, () => console.log(`Server in ascolto sulla porta ${PORT}`));
+init();
+server.listen(PORT, () => console.log(`Server in ascolto sulla porta ${PORT}`));
