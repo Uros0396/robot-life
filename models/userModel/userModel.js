@@ -87,5 +87,5 @@ const UserSchema = new mongoose.Schema(
     strict: true,
   }
 );
-//routes: users
+
 module.exports = mongoose.model("userModel", UserSchema, "users");
