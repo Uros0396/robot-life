@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+/*const mongoose = require("mongoose");
 
 const CreditCardSchema = new mongoose.Schema(
   {
@@ -25,4 +25,4 @@ module.exports = mongoose.model(
   "creditCardModel",
   CreditCardSchema,
   "creditCards"
-);
+);*/

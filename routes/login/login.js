@@ -40,11 +40,11 @@ login.post("/login", validateLogin, async (req, res) => {
     });
 
     res
-      .header("Authorization", token)
+      .header("Authorization", `Bearer ${token}`)
       .status(200)
       .send({
         statusCode: 200,
-        token,
+        token: `Bearer ${token}`,
         user: {
           name: user.name,
           surname: user.surname,

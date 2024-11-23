@@ -2,10 +2,15 @@ const mongoose = require("mongoose");
 
 const ProductSchema = new mongoose.Schema(
   {
-    name: {
+    asin: {
       type: String,
       required: true,
-      trim: true,
+    },
+
+    image: {
+      type: String,
+      required: false,
+      default: "https://placehold.co/600x400",
     },
 
     title: {
@@ -20,13 +25,13 @@ const ProductSchema = new mongoose.Schema(
     },
 
     price: {
-      type: Number,
+      type: mongoose.Types.Decimal128,
       required: true,
       min: 0,
     },
 
     stock: {
-      type: Number,
+      type: mongoose.Types.Decimal128,
       required: true,
       min: 0,
     },
@@ -43,24 +48,17 @@ const ProductSchema = new mongoose.Schema(
       },
     ],
 
-    carts: [
+    /*carts: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "cartModel",
       },
-    ],
+    ],*/
 
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "userModel",
-      required: true,
     },
-
-    images: [
-      {
-        type: String,
-      },
-    ],
   },
   {
     timestamps: true,

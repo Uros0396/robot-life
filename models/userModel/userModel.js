@@ -49,19 +49,17 @@ const UserSchema = new mongoose.Schema(
       default: "user",
     },
 
-    addresses: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "addressModel",
-      },
-    ],
+    address: {
+      type: String,
+      required: true,
+    },
 
-    creditCards: [
+    /*creditCards: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "creditCardModel",
       },
-    ],
+    ],*/
 
     comments: [
       {
@@ -70,17 +68,17 @@ const UserSchema = new mongoose.Schema(
       },
     ],
 
-    cart: {
+    /*cart: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "cartModel",
-    },
+    },*/
 
-    wishlist: [
+    /*wishlist: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "productModel",
       },
-    ],
+    ],*/
   },
   {
     timestamps: true,
