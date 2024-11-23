@@ -48,16 +48,10 @@ const ProductSchema = new mongoose.Schema(
       },
     ],
 
-    /*carts: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "cartModel",
-      },
-    ],*/
-
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "userModel",
+      required: true,
     },
   },
   {

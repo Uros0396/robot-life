@@ -54,31 +54,12 @@ const UserSchema = new mongoose.Schema(
       required: true,
     },
 
-    /*creditCards: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "creditCardModel",
-      },
-    ],*/
-
     comments: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "commentModel",
       },
     ],
-
-    /*cart: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "cartModel",
-    },*/
-
-    /*wishlist: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "productModel",
-      },
-    ],*/
   },
   {
     timestamps: true,
