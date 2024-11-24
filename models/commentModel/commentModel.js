@@ -2,14 +2,15 @@ const mongoose = require("mongoose");
 
 const CommentSchema = new mongoose.Schema(
   {
-    content: {
+    comment: {
       type: String,
       required: true,
     },
 
-    rating: {
+    rate: {
       type: Number,
       required: true,
+      default: 0,
     },
 
     user: {
