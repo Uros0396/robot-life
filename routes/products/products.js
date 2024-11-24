@@ -73,8 +73,7 @@ products.post(
     try {
       const { asin, title, image, description, price, stock } = req.body;
 
-      // Qui puoi accedere a req.user per ottenere i dati dell'admin (incluso il suo ID)
-      const adminId = req.user.id; // ID dell'admin dal token
+      const adminId = req.user.id;
       console.log("Product Data:", {
         asin,
         title,
@@ -85,7 +84,6 @@ products.post(
       });
       console.log("Admin ID:", adminId);
 
-      // Creazione del prodotto
       const newProduct = new productModel({
         asin,
         title,
@@ -93,7 +91,7 @@ products.post(
         description,
         price: mongoose.Types.Decimal128.fromString(price.toString()),
         stock: mongoose.Types.Decimal128.fromString(stock.toString()),
-        createdBy: adminId, // Puoi anche associare l'ID dell'admin al prodotto (facoltativo)
+        createdBy: adminId,
       });
 
       const savedProduct = await newProduct.save();
@@ -204,5 +202,3 @@ products.delete("/products/:id", async (req, res) => {
 });
 
 module.exports = products;
-
-/*Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NDFjNTFlYmUxNzdlNzZjMzQ0OTk4YiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczMjM4MTIzMywiZXhwIjoxNzMyMzk1NjMzfQ.p6wr-UyVmSLPKgXPcWpdOwQvrsqELif5pjnKG_6Mj6Y*/

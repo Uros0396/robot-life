@@ -4,6 +4,7 @@ const init = require("./db");
 const userRoute = require("./routes/users/users");
 const loginRoute = require("./routes/login/login");
 const productRoute = require("./routes/products/products");
+const errorHandler = require("./middleware/errorHandler/errorHandler");
 
 dotenv.config();
 
@@ -18,13 +19,7 @@ server.use("/", loginRoute);
 
 server.use("/", productRoute);
 
-server.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(err.status || 500).send({
-    statusCode: err.status || 500,
-    message: err.message || "Internal Server Error",
-  });
-});
+server.use(errorHandler);
 
 init();
 server.listen(PORT, () => console.log(`Server in ascolto sulla porta ${PORT}`));
