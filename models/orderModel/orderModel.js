@@ -5,37 +5,72 @@ const OrderSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "userModel",
+      required: true,
     },
 
-    products: [
+    items: [
       {
         product: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "productModel",
+          required: true,
         },
-
         quantity: {
           type: Number,
           required: true,
         },
+        price: {
+          type: mongoose.Types.Decimal128,
+          required: true,
+        },
       },
     ],
+
+    shippingAddress: {
+      street: {
+        type: String,
+        required: true,
+      },
+
+      houseNumber: {
+        type: Number,
+        required: true,
+      },
+
+      city: {
+        type: String,
+        required: true,
+      },
+
+      CAP: {
+        type: Number,
+        required: true,
+      },
+
+      country: {
+        type: String,
+        required: true,
+      },
+    },
 
     totalPrice: {
       type: Number,
       required: true,
     },
 
-    status: {
+    paymentStatus: {
       type: String,
-      enum: ["pending", "completed", "canceled"],
+      enum: ["pending", "succeeded", "failed"],
       default: "pending",
     },
+
+    stripePaymentId: {
+      type: String, // ID del pagamento generato da Stripe (es. pi_xxx)
+      required: false,
+      default: null,
+    },
   },
-  {
-    timestamps: true,
-    strict: true,
-  }
+  { timestamps: true }
 );
 
-module.exports = mongoose.model("orderModel", OrderSchema, "order");
+module.exports = mongoose.model("orderModel", OrderSchema, "orders");

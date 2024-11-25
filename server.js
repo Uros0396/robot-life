@@ -5,6 +5,7 @@ const userRoute = require("./routes/users/users");
 const loginRoute = require("./routes/login/login");
 const productRoute = require("./routes/products/products");
 const commentRoute = require("./routes/comments/comments");
+const orderRoute = require("./routes/order/order");
 const errorHandler = require("./middleware/errorHandler/errorHandler");
 
 dotenv.config();
@@ -21,6 +22,8 @@ server.use("/", loginRoute);
 server.use("/", productRoute);
 
 server.use("/", commentRoute);
+
+server.use("/", orderRoute);
 
 server.use(errorHandler);
 

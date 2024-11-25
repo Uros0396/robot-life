@@ -1,4 +1,4 @@
-/*const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 const StockSchema = new mongoose.Schema(
   {
@@ -18,4 +18,4 @@ const StockSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("stockModel", StockSchema, "stock");*/
+module.exports = mongoose.model("stockModel", StockSchema, "stock");

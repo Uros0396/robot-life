@@ -1,4 +1,7 @@
 const mongoose = require("mongoose");
+const allowedCategory = [
+  "All, Accessories, Robot For House, Robot For Medicine, Work Robot, Play Robot, robot exoskeletons",
+];
 
 const ProductSchema = new mongoose.Schema(
   {
@@ -22,6 +25,12 @@ const ProductSchema = new mongoose.Schema(
     description: {
       type: String,
       trim: true,
+    },
+
+    category: {
+      type: String,
+      enum: allowedCategory,
+      required: true,
     },
 
     price: {

@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const productModel = require("../../models/productModel/productModel");
+const cloud = require("../../middleware/cloudinaryMiddleware/cloudinary");
 const products = express.Router();
 const validateBodyProduct = require("../../middleware/validateBodyProduct/validateBodyProduct");
 const authenticateAdmin = require("../../middleware/authAdminMiddleware/authAdminMiddleware");
@@ -64,6 +65,7 @@ products.get("/products/title/:title", async (req, res) => {
     console.log(error);
   }
 });
+/*Product.updateOne( { _id: productId }, { $inc: { availableInStock: -1 } } aggiungilo nella post*/
 
 products.post(
   "/products/create",
@@ -71,7 +73,8 @@ products.post(
   async (req, res) => {
     console.log("Received request to create product:", req.body);
     try {
-      const { asin, title, image, description, price, stock } = req.body;
+      const { asin, title, image, description, category, price, stock } =
+        req.body;
 
       const adminId = req.user.id;
       console.log("Product Data:", {
@@ -79,6 +82,7 @@ products.post(
         title,
         image,
         description,
+        category,
         price,
         stock,
       });
@@ -112,16 +116,19 @@ products.post(
 );
 
 products.put("/products/:id", async (req, res) => {
+  const { asin, title, image, description, category, price, stock } = req.body;
+
   try {
     const updatedProduct = await productModel.findByIdAndUpdate(
       req.params.id,
       {
-        asin: req.body.asin,
-        title: req.body.title,
-        image: req.body.image,
-        description: req.body.description,
-        price: Number(req.body.price),
-        stock: Number(req.body.stock),
+        asin,
+        title,
+        image,
+        description,
+        category,
+        price: mongoose.Types.Decimal128.fromString(price.toString()),
+        stock: mongoose.Types.Decimal128.fromString(stock.toString()),
       },
       { new: true }
     );
@@ -200,5 +207,29 @@ products.delete("/products/:id", async (req, res) => {
     });
   }
 });
+
+products.post(
+  "/products/upload/cloud",
+  cloud.single("file"),
+  async (req, res, next) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({
+          message: "Not uploaded file",
+        });
+      }
+      res.status(201).json({
+        statusCode: 201,
+        message: "Uploaded successfully",
+        file: {
+          url: req.file.path,
+          public_id: req.file.filename,
+        },
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 module.exports = products;

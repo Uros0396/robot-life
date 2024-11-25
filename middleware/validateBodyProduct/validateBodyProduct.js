@@ -11,6 +11,10 @@ const validateBodyProduct = (req, res, next) => {
     errors.push("Title must be a string");
   }
 
+  if (typeof category !== "string") {
+    errors.push("category must be a string");
+  }
+
   if (typeof description !== "string") {
     errors.push("Description must be a string");
   }
