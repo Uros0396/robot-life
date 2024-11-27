@@ -65,7 +65,7 @@ const OrderSchema = new mongoose.Schema(
     },
 
     stripePaymentId: {
-      type: String, // ID del pagamento generato da Stripe (es. pi_xxx)
+      type: String,
       required: false,
       default: null,
     },
