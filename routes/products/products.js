@@ -100,6 +100,13 @@ products.post(
 
       const savedProduct = await newProduct.save();
 
+      const productId = savedProduct._id;
+
+      await productModel.updateOne(
+        { _id: productId },
+        { $inc: { availableInStock: -1 } }
+      );
+
       res.status(201).send({
         statusCode: 201,
         message: "Product created successfully",
@@ -233,5 +240,3 @@ products.post(
 );
 
 module.exports = products;
-
-/*mailjet._d2f59030 d2f59030666e9a12fcb249263413abb6*/
