@@ -1,6 +1,12 @@
 const mongoose = require("mongoose");
 const allowedCategory = [
-  "All, Accessories, Robot For House, Robot For Medicine, Work Robot, Play Robot, robot exoskeletons",
+  "All",
+  "Accessories",
+  "Robot For House",
+  "Robot For Medicine",
+  "Work Robot",
+  "Play Robot",
+  "Robot Exoskeletons",
 ];
 
 const ProductSchema = new mongoose.Schema(

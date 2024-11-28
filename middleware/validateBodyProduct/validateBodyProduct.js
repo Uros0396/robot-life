@@ -1,7 +1,7 @@
 const validateBodyProduct = (req, res, next) => {
   const errors = [];
 
-  const { asin, title, description, price, stock } = req.body;
+  const { asin, title, description, category, price, stock } = req.body;
 
   if (typeof asin !== "string") {
     errors.push("Asin must be a string");

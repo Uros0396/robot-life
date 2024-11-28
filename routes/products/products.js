@@ -65,7 +65,6 @@ products.get("/products/title/:title", async (req, res) => {
     console.log(error);
   }
 });
-/*Product.updateOne( { _id: productId }, { $inc: { availableInStock: -1 } } aggiungilo nella post*/
 
 products.post(
   "/products/create",
@@ -75,6 +74,7 @@ products.post(
     try {
       const { asin, title, image, description, category, price, stock } =
         req.body;
+      console.log("Category Type:", typeof category);
 
       const adminId = req.user.id;
       console.log("Product Data:", {
@@ -93,6 +93,7 @@ products.post(
         title,
         image,
         description,
+        category,
         price: mongoose.Types.Decimal128.fromString(price.toString()),
         stock: mongoose.Types.Decimal128.fromString(stock.toString()),
         createdBy: adminId,
@@ -102,10 +103,7 @@ products.post(
 
       const productId = savedProduct._id;
 
-      await productModel.updateOne(
-        { _id: productId },
-        { $inc: { availableInStock: -1 } }
-      );
+      await productModel.updateOne({ _id: productId }, { $inc: { stock: -1 } });
 
       res.status(201).send({
         statusCode: 201,
