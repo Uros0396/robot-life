@@ -4,9 +4,10 @@ const allowedCategory = [
   "Accessories",
   "Robot For House",
   "Robot For Medicine",
-  "Work Robot",
-  "Play Robot",
+  "Humanoid Robots",
+  "Cyber-Dogs",
   "Robot Exoskeletons",
+  "Drones",
 ];
 
 const ProductSchema = new mongoose.Schema(
@@ -16,11 +17,13 @@ const ProductSchema = new mongoose.Schema(
       required: true,
     },
 
-    image: {
-      type: String,
-      required: false,
-      default: "https://placehold.co/600x400",
-    },
+    image: [
+      {
+        type: String,
+        required: false,
+        default: "https://placehold.co/600x400",
+      },
+    ],
 
     title: {
       type: String,

@@ -19,7 +19,7 @@ const cloudStorage = new CloudinaryStorage({
     }
     return {
       folder: "ROBOTLIFE",
-      allowed_formats: ["jpg", "png", "gif", "mp4", "mov", "avi"],
+      allowed_formats: ["jpg", "png", "gif", "mp4", "mov", "avi", "webp"],
       resource_type: isVideo ? "video" : "image",
 
       public_id: file.originalname.split(".")[0],

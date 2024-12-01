@@ -120,7 +120,7 @@ products.post(
   }
 );
 
-products.put("/products/:id", async (req, res) => {
+products.put("/products/updatePut/:id", async (req, res) => {
   const { asin, title, image, description, category, price, stock } = req.body;
 
   try {
@@ -159,7 +159,7 @@ products.put("/products/:id", async (req, res) => {
   }
 });
 
-products.patch("/products/:id", async (req, res) => {
+products.patch("/products/updatePatch/:id", async (req, res) => {
   try {
     const updatedProduct = await productModel.findByIdAndUpdate(
       req.params.id,
@@ -188,7 +188,7 @@ products.patch("/products/:id", async (req, res) => {
   }
 });
 
-products.delete("/products/:id", async (req, res) => {
+products.delete("/products/delete/:id", async (req, res) => {
   try {
     const deletedProduct = await productModel.findByIdAndDelete(req.params.id);
 
