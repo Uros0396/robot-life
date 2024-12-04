@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const allowedCategory = [
-  "All",
   "Accessories",
   "Robot For House",
   "Robot For Medicine",

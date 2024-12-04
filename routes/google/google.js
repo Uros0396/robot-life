@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const google = express.Router();
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const Usersmodel = require("../models/Usersmodel");
+const UsersModel = require("../../models/userModel/userModel");
 
 google.use(
   session({
@@ -35,13 +35,14 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        let user = await Usersmodel.findOne({ email: profile._json.email });
+        let user = await UsersModel.findOne({ email: profile._json.email });
         if (!user) {
           const { _json: userData } = profile;
-          const userToSave = new Usersmodel({
+          const userToSave = new UsersModel({
             name: userData.given_name,
             email: userData.email,
             surname: userData.family_name,
+
             dob: new Date(),
             password: "123456789",
             username: `${userData.given_name}_${userData.family_name}`,
@@ -71,6 +72,7 @@ google.get(
       surname: user.surname,
       email: user.email,
       _id: user._id,
+      role: user.role,
     };
     const userToken = jwt.sign(token, process.env.JWT_SECRET);
     const redirectUrl = `${
