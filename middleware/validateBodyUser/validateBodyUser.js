@@ -1,7 +1,7 @@
 const validateBodyUser = (req, res, next) => {
   const errors = [];
 
-  const { name, surname, address, email, dob, password, role } = req.body;
+  const { name, surname, email, dob, username, password, role } = req.body;
   console.log(req.body);
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -28,8 +28,8 @@ const validateBodyUser = (req, res, next) => {
     errors.push("Surname must be a string and at least 3 characters long");
   }
 
-  if (typeof address !== "string" || address.trim() === "") {
-    errors.push("Address is required");
+  if (typeof username !== "string" || username.length < 3) {
+    errors.push("Username must be a string and at least 3 characters long");
   }
 
   if (errors.length > 0) {

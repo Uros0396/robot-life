@@ -1,11 +1,13 @@
 const express = require("express");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-const userModel = require("../../models/userModel/userModel");
-const validateLogin = require("../../middleware/validateLogin/validateLogin");
+//const jwt = require("jsonwebtoken");
+//const bcrypt = require("bcrypt");
+//const userModel = require("../../models/userModel/userModel");
+//const validateLogin = require("../../middleware/validateLogin/validateLogin");
 const login = express.Router();
+const generateToken = require("../../middleware/generateToken/generateToken");
+const validatePassword = require("../../middleware/validatePassword/validatePassword");
 
-login.post("/login", validateLogin, async (req, res) => {
+/*login.post("/login", validateLogin, async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
@@ -40,15 +42,38 @@ login.post("/login", validateLogin, async (req, res) => {
       expiresIn: "240m",
     });
 
-    res.status(200).send({
-      statusCode: 200,
-      message: "Login successful",
-      token: `Bearer ${token}`,
-    });
+    res
+      .header("Authorization", token)
+      .status(200)
+      .send({
+        statusCode: 200,
+        message: "Login successful",
+        token: `Bearer ${token}`,
+      });
   } catch (error) {
     console.error("Error during login:", error);
     next(error);
   }
+});*/
+
+login.post("/login", validatePassword, (req, res) => {
+  const user = req.user;
+  const userToken = generateToken(user);
+  res
+    .header("Authorization", userToken)
+    .status(200)
+    .send({
+      statusCode: 200,
+      message: "You are successfully logged in",
+      token: userToken,
+      user: {
+        name: user.name,
+        surname: user.surname,
+        email: user.email,
+        role: user.role,
+        _id: user._id,
+      },
+    });
 });
 
 module.exports = login;

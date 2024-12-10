@@ -7,6 +7,7 @@ const allowedCategory = [
   "Cyber-Dogs",
   "Robot Exoskeletons",
   "Drones",
+  "3D Printer",
 ];
 
 const ProductSchema = new mongoose.Schema(
