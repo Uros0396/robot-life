@@ -11,7 +11,7 @@ order.post("/order", async (req, res) => {
   if (!user || !items || !shippingAddress) {
     return res
       .status(400)
-      .send({ message: "Dati mancanti nel corpo della richiesta" });
+      .send({ message: "Missing data in the request body" });
   }
 
   const missingItems = items.filter(
@@ -20,14 +20,12 @@ order.post("/order", async (req, res) => {
   if (missingItems.length > 0) {
     return res
       .status(400)
-      .send({ message: "Dati prodotti incompleti per alcuni articoli" });
+      .send({ message: "Incomplete product data for some items" });
   }
 
   const { street, houseNumber, city, CAP, country } = shippingAddress;
   if (!street || !houseNumber || !city || !CAP || !country) {
-    return res
-      .status(400)
-      .send({ message: "Indirizzo di spedizione incompleto" });
+    return res.status(400).send({ message: "Incomplete shipping address" });
   }
 
   try {
@@ -59,7 +57,7 @@ order.post("/order", async (req, res) => {
         if (product) {
           if (product.stock < item.quantity) {
             throw new Error(
-              `Non c'è abbastanza stock per il prodotto ${product.title}`
+              `Not enough stock for the product ${product.title}`
             );
           }
 
@@ -68,7 +66,7 @@ order.post("/order", async (req, res) => {
             { $inc: { stock: -item.quantity } }
           );
         } else {
-          throw new Error(`Prodotto con ID ${item.product} non trovato`);
+          throw new Error(`Product with ID ${item.product} not found`);
         }
       });
     });
@@ -76,14 +74,14 @@ order.post("/order", async (req, res) => {
     await Promise.all(stockUpdatePromises);
 
     res.status(201).send({
-      message: "Ordine creato, pronto per il pagamento",
+      message: "Order created, ready for payment",
       clientSecret: paymentIntent.client_secret,
       order: savedOrder,
     });
   } catch (error) {
-    console.error("Errore durante la creazione dell'ordine:", error.message);
+    console.error("Error creating the order:", error.message);
     console.error("Stack:", error.stack);
-    res.status(500).send({ message: "Errore del server" });
+    res.status(500).send({ message: "Server Error" });
   }
 });
 
