@@ -26,6 +26,34 @@ products.get("/products", async (req, res) => {
   }
 });
 
+products.get("/products/pagination", async (req, res) => {
+  const { page = 1, pageSize = 4 } = req.query;
+  try {
+    const products = await productModel
+      .find()
+      .limit(pageSize)
+      .skip((page - 1) * pageSize);
+    const count = await productModel.countDocuments();
+    const totalPages = Math.ceil(count / pageSize);
+    if (!products) {
+      return res.status(404).send({
+        statusCode: 404,
+        message: "Not Found",
+      });
+    }
+
+    res.status(200).send({
+      statusCode: 200,
+      message: `Products Found: ${products.length}`,
+      products,
+      count,
+      totalPages,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 products.get("/products/:id", async (req, res) => {
   try {
     const product = await productModel.findById(req.params.id);
@@ -47,22 +75,41 @@ products.get("/products/:id", async (req, res) => {
 });
 
 products.get("/products/title/:title", async (req, res) => {
+  const { title } = req.params;
+
+  if (!title) {
+    return res.status(400).send({
+      statusCode: 400,
+      message: "Title is required",
+    });
+  }
+
   try {
-    const product = await productModel.findOne({ title: req.params.title });
-    if (!product) {
+    const products = await productModel.find({
+      title: {
+        $regex: title, // Cerca il titolo parziale
+        $options: "i", // Case-insensitive
+      },
+    });
+
+    if (!products || products.length === 0) {
       return res.status(404).send({
         statusCode: 404,
-        message: "Not Found",
+        message: "Title not found",
       });
     }
 
     res.status(200).send({
       statusCode: 200,
-      message: "Product Found",
-      product,
+      message: `Products Found: ${products.length}`,
+      products, // Ritorna un array di prodotti corrispondenti
     });
   } catch (error) {
-    console.log(error);
+    console.error("Error while searching products:", error);
+    res.status(500).send({
+      statusCode: 500,
+      message: "Internal Server Error",
+    });
   }
 });
 
