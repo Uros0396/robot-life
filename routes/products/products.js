@@ -87,8 +87,8 @@ products.get("/products/title/:title", async (req, res) => {
   try {
     const products = await productModel.find({
       title: {
-        $regex: title, // Cerca il titolo parziale
-        $options: "i", // Case-insensitive
+        $regex: title,
+        $options: "i",
       },
     });
 
@@ -102,7 +102,7 @@ products.get("/products/title/:title", async (req, res) => {
     res.status(200).send({
       statusCode: 200,
       message: `Products Found: ${products.length}`,
-      products, // Ritorna un array di prodotti corrispondenti
+      products,
     });
   } catch (error) {
     console.error("Error while searching products:", error);

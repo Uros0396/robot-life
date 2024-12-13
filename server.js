@@ -37,4 +37,4 @@ server.use("/", googleRoute);
 server.use(errorHandler);
 
 init();
-server.listen(PORT, () => console.log(`Server in ascolto sulla porta ${PORT}`));
+server.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
