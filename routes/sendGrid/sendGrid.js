@@ -38,14 +38,14 @@ email.post("/email", async (req, res) => {
 
     res.status(200).json({
       statusCode: 200,
-      message: "Email inviata con successo",
+      message: "Email sent successfully",
       msgEmail,
     });
   } catch (error) {
-    console.error("Errore nell'invio dell'email:", error);
+    console.error("Error send email:", error);
     res.status(500).json({
       statusCode: 500,
-      message: "Errore nell'invio dell'email. Riprova più tardi.",
+      message: "Error sending the email. Please try again later.",
     });
   }
 });
@@ -54,19 +54,19 @@ email.get("/messages", async (req, res) => {
   try {
     res.status(200).json(messages);
   } catch (error) {
-    console.error("Errore nel recupero dei messaggi:", error);
+    console.error("Error retrieving the messages:", error);
     res.status(500).json({
       statusCode: 500,
-      message: "Errore nel recupero dei messaggi.",
+      message: "Error retrieving the messages.",
     });
   }
 });
 
 email.use((err, req, res, next) => {
-  console.error("Errore generico:", err);
+  console.error("General error:", err);
   res.status(500).json({
     statusCode: 500,
-    message: "Errore interno del server.",
+    message: "Server error.",
   });
 });
 
