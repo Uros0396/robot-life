@@ -2,26 +2,124 @@ Questo e' il link per il Frontend: https://github.com/Uros0396/ROBOT-LIFE-FRONTE
 
 ROBOTLIFE
 
-Questo e' un ecommerce per la vendita di robot, prodotti robotici e accessori. E' diviso in otto categorie, che vanno da robot per la medicina fino ai robot giocattolo.
+# Ecommerce Robotica - README
 
-TECNOLOGIE UTILIZZATE: react, vite, redux, react router, Bootstrap, CSS Personalizzato, Lucide-React, Redux Toolkit, JWT-Decode
+## Descrizione del Progetto
 
-Funzionalità Principali
-Gestione Utenti e Autenticazione:
+Questo progetto è un ecommerce dedicato alla vendita online di robot, stampanti 3D e accessori per la robotica.
+Il sito prevede due tipi di utenti:
 
-Gli utenti devono essere registrati e loggati per poter accedere alle pagine di dettaglio del prodotto e al carrello.
-Le Protected Routes sono implementate per garantire che solo gli utenti autenticati possano visualizzare queste pagine.
-Carrello: Gli utenti possono aggiungere e rimuovere i robot nel carrello. L'intera logica del carrello è gestita tramite Redux.
-Recensioni: Ogni prodotto ha una sezione di commenti in cui gli utenti possono leggere e lasciare recensioni.
+- **Admin**: solo l'admin (io) può gestire i prodotti.
+- **User**: gli utenti possono registrarsi o effettuare il login per accedere ai dettagli dei prodotti e completare gli acquisti.
 
-Protected Routes:
+### Funzionalità Principali
 
-L'accesso alle pagine di dettaglio prodotto e al carrello è protetto, garantendo che solo gli utenti registrati e loggati possano interagire con queste funzionalità.
-Thumbnail delle Immagini: Le immagini dei prodotti vengono visualizzate in miniatura nei dettagli, permettendo una rapida visualizzazione.
+- **Accesso Utente**:
 
-Search Bar: L'input di ricerca è presente nella barra di navigazione dell'homepage per facilitare la ricerca dei prodotti per titolo.
+  - Possibilità di login tradizionale o tramite Google.
+  - Gestione della sessione utente basata su token JWT tramite l'hook `useSession`.
 
-Funzionalità di SendMail
-Contattaci: Abbiamo integrato una funzionalità di invio email tramite SendMail, in modo che i clienti possano contattare il supporto in caso di problemi con i prodotti.
+- **Prodotti e Dettagli**:
 
+  - Gli utenti devono essere registrati per accedere ai dettagli dei prodotti.
+  - Implementazione di `ProtectedRoutes` per proteggere le pagine _Details_ e il componente _Cart_.
 
+- **Ricerca Prodotti**:
+
+  - Campo di ricerca nella navbar della homepage.
+  - Risultati visibili in fondo alla homepage, visualizzati nel componente `MainComponent`.
+
+- **Carrello**:
+
+  - Gestito tramite `cartSlice` in Redux.
+  - Middleware `validationPayment` per validare i pagamenti.
+  - Notifiche con SweetAlert per confermare aggiunte al carrello.
+
+- **Commenti**:
+
+  - Gli utenti possono inviare commenti sui prodotti nella pagina _Details_.
+  - `commentSlice` gestisce la logica per l'invio (`POST`) tramite il componente e la visualizzazione (`GET`) dei commenti e' in details `CommentForm`.
+
+- **Messaggi di Supporto**:
+  - Integrazione di SendGrid per consentire agli utenti di inviare messaggi nel caso di prodotti guasti tramite il componente `ContactForm`.
+
+### Tecnologie Utilizzate
+
+#### Frontend:
+
+- **Librerie e Framework**:
+
+  - React
+  - Redux
+  - SweetAlert
+  - Bootstrap
+  - CSS
+  - lucide
+  - Bootstrap react icons
+
+- **Gestione Stato**:
+  - Redux con i reducer:
+    - `detProductReducer` per ottenere i prodotti (usato in _CategoryPages_).
+    - `cartSlice` per il carrello.
+    - `commentSlice` per i commenti.
+
+#### Backend:
+
+- **Tecnologie**:
+
+  - Node.js
+  - Express
+  - MongoDB
+  - Cloudinary per la gestione delle immagini.
+
+- **Modelli**:
+
+  - `Product`, `User`, `Order`, `Comment`.
+
+- **Rotte**:
+
+  - Login
+  - Google
+  - Comments
+  - Order
+  - Products
+  - SendGrid
+  - User
+
+- **Middleware**:
+  - 8 middleware, inclusi:
+    - `authAdminMiddleware` per autorizzare solo l'admin alla creazione di nuovi prodotti.
+    - `validationPayment` per gestire la validazione dei pagamenti.(frontend)
+
+#### Strumenti di Sviluppo
+
+- Postman: utilizzato per creare i prodotti (solo dall'admin).
+
+### Altre Informazioni
+
+Tutti i prodotti e i dettagli sono stati caricati dall'admin tramite Postman. Gli utenti non possono aggiungere nuovi prodotti grazie al middleware di autenticazione per admin.
+
+### Installazione
+
+1. Clona il repository:
+   ```bash
+   git clone <repository-url>
+   ```
+2. Installa le dipendenze:
+   ```bash
+   npm install
+   ```
+3. Configura le variabili d'ambiente per:
+
+   - MongoDB
+   - SendGrid
+   - Cloudinary
+
+4. Avvia il progetto:
+   ```bash
+   npm run start
+   ```
+
+### Crediti
+
+Progetto sviluppato da Uros Milenkovic.
