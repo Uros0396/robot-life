@@ -103,7 +103,7 @@ Tutti i prodotti e i dettagli sono stati caricati dall'admin tramite Postman. Gl
 
 1. Clona il repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Uros0396/ROBOT-LIFE-FRONTEND
    ```
 2. Installa le dipendenze:
    ```bash
