@@ -64,7 +64,7 @@ const ProductSchema = new mongoose.Schema(
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "userModel",
-      required: true,
+      required: false,
     },
   },
   {
