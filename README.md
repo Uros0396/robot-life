@@ -97,7 +97,41 @@ Il sito prevede due tipi di utenti:
 
 ### Altre Informazioni
 
-Tutti i prodotti e i dettagli sono stati caricati dall'admin tramite Postman. Gli utenti non possono aggiungere nuovi prodotti grazie al middleware di autenticazione per admin.
+Tutti i prodotti e i dettagli sono stati caricati dall'admin tramite Postman. Gli utenti non possono aggiungere nuovi prodotti grazie al middleware di autenticazione per
+admin.
+
+# Variabili d' ambiente backend:
+
+DB_URI
+
+DEBUG_MODE
+
+JWT_SECRET
+VITE_STRIPE_SECRET_KEY
+
+CLOUDINARY_API_KEY
+
+CLOUDINARY_API_SECRET
+CLOUDINARY_CLOUD_NAME
+
+SENDGRID_API_KEY
+
+SENDER_EMAIL
+
+googleapi
+
+GOOGLE_CLIENT_ID
+
+GOOGLE_CLIENT_SECRET
+
+GOOGLE_CALLBACK_URL
+
+FRONTEND_URL
+
+
+VITE_SERVER_BASE_URL
+
+
 
 ### Installazione
 
