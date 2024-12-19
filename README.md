@@ -128,7 +128,7 @@ GOOGLE_CALLBACK_URL
 
 FRONTEND_URL
 
-
+# Variabili d' ambiente frontend:
 VITE_SERVER_BASE_URL
 
 
