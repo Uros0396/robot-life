@@ -1,4 +1,5 @@
 Questo e' il link per il Frontend: https://github.com/Uros0396/ROBOT-LIFE-FRONTEND
+Qua il VIDEO del mio progetto: https://www.loom.com/share/8af9755028f446dbbf8fc1c09ef37b2b?sid=481e75f4-e9c1-482b-9856-69c6f20bfb9d   
 
 ROBOTLIFE
 
