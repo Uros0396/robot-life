@@ -5,72 +5,76 @@ const OrderSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "userModel",
-      required: true,
+      required: false,
     },
-
     items: [
       {
-        product: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "productModel",
-          required: true,
-        },
-        quantity: {
-          type: Number,
-          required: true,
-        },
-        price: {
+        products: [
+          {
+            product: {
+              type: mongoose.Schema.Types.ObjectId,
+              ref: "productModel",
+              required: true,
+            },
+            quantity: {
+              type: Number,
+              required: true,
+              min: 1,
+            },
+            price: {
+              type: mongoose.Types.Decimal128,
+              required: true,
+            },
+          },
+        ],
+        subTotal: {
           type: mongoose.Types.Decimal128,
           required: true,
         },
       },
     ],
-
+    totalAmount: {
+      type: mongoose.Types.Decimal128,
+      required: true,
+    },
+    paymentId: {
+      type: String,
+      required: false,
+      default: null,
+    },
+    status: {
+      type: String,
+      enum: ["Pending", "Shipped", "Delivered", "Canceled"],
+      default: "Pending",
+    },
     shippingAddress: {
+      fullName: {
+        type: String,
+        required: true,
+        trim: true,
+      },
       street: {
         type: String,
         required: true,
       },
-
-      houseNumber: {
-        type: Number,
-        required: true,
-      },
-
       city: {
         type: String,
         required: true,
       },
-
-      CAP: {
-        type: Number,
+      postalCode: {
+        type: String,
         required: true,
       },
-
       country: {
         type: String,
         required: true,
       },
     },
-
-    totalPrice: {
-      type: Number,
-      required: true,
-    },
-
-    paymentStatus: {
-      type: String,
-      enum: ["pending", "succeeded", "failed"],
-      default: "pending",
-    },
-
-    stripePaymentId: {
-      type: String,
-      required: false,
-      default: null,
-    },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+    strict: true,
+  }
 );
 
-module.exports = mongoose.model("orderModel", OrderSchema, "orders");
+module.exports = mongoose.model("Order", OrderSchema, "orders");
