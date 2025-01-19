@@ -39,6 +39,7 @@ Il sito prevede due tipi di utenti:
   - SweetAlert
   - Bootstrap
   - CSS
+  - Stripe
 
 - **Gestione Stato**:
   - Redux con i reducer:
@@ -52,7 +53,8 @@ Il sito prevede due tipi di utenti:
   - Express
   - MongoDB
   - Cloudinary per la gestione delle immagini
-  - Tecnologia
+  - SendGrid
+  - Stripe
 
 - **Modelli**:
   - `Product`, `User`, `Order`, `Comment`.
