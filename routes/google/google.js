@@ -36,27 +36,33 @@ passport.use(
     async (accessToken, refreshToken, profile, done) => {
       try {
         let user = await UsersModel.findOne({ email: profile._json.email });
+
         if (!user) {
           const { _json: userData } = profile;
+
+          const surname = userData.family_name || "DefaultSurname";
+
           const userToSave = new UsersModel({
             name: userData.given_name,
+            surname: surname,
             email: userData.email,
-            surname: userData.family_name,
-
             dob: new Date(),
             password: "123456789",
-            username: `${userData.given_name}_${userData.family_name}`,
+            username: `${userData.given_name}_${surname}`,
           });
+
           user = await userToSave.save();
         }
+
         done(null, user);
       } catch (error) {
-        console.log(error);
+        console.error(error);
         done(error, null);
       }
     }
   )
 );
+
 google.get(
   "/auth/google",
   passport.authenticate("google", { scope: ["email", "profile"] })
@@ -67,6 +73,7 @@ google.get(
   passport.authenticate("google", { failureRedirect: "/" }),
   (req, res) => {
     const user = req.user;
+
     const token = {
       name: user.name,
       surname: user.surname,
@@ -74,10 +81,13 @@ google.get(
       _id: user._id,
       role: user.role,
     };
+
     const userToken = jwt.sign(token, process.env.JWT_SECRET);
+
     const redirectUrl = `${
       process.env.FRONTEND_URL
     }/success?token=${encodeURIComponent(userToken)}`;
+
     res.redirect(redirectUrl);
   }
 );
