@@ -1,5 +1,7 @@
 ROBOT-LIFE E-Commerce - README
+
 Frontend LINK: https://robot-life-frontend.vercel.app/
+
 Frontend GitHub LINK: https://github.com/Uros0396/ROBOT-LIFE-FRONTEND
 
 Project Description
@@ -102,8 +104,10 @@ Run the project:
 
 bash
 Copia
+
 Modifica
 npm run dev
+
 Credits
 Project developed by Uros Milenkovic.
 
