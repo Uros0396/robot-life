@@ -22,14 +22,14 @@ Implementation of ProtectedRoutes to protect the Details page and the Cart compo
 Product Search:
 
 A search field in the navbar of the homepage.
-Search results are displayed at the bottom of the homepage within the MainComponent.
-Shopping Cart:
+Search results are displayed at the bottom of the homepage within the MainComponent.  
 
+Shopping Cart:
 Managed using cartSlice in Redux.
 validationPayment middleware to validate payments.
 SweetAlert notifications to confirm items added to the cart.
-Comments:
 
+Comments:
 Users can leave comments on products on the Details page.
 commentSlice handles the logic for submitting (POST) and displaying (GET) comments via the CommentForm component.
 Support Messages:
@@ -45,12 +45,14 @@ SweetAlert
 Bootstrap
 CSS
 Stripe
+
 State Management:
 
 Redux with the following reducers:
 getProductReducer for fetching products (used in CategoryPages).
 cartSlice for managing the shopping cart.
 commentSlice for managing comments.
+
 Backend:
 Technologies:
 
@@ -60,11 +62,11 @@ MongoDB
 Cloudinary for image management
 SendGrid
 Stripe
+
 Models:
-
 Product, User, Order, Comment.
-Routes:
 
+Routes:
 Login
 Google
 Comments
@@ -79,33 +81,23 @@ authAdminMiddleware to authorize only the admin to create new products.
 validationPayment to manage payment validation.
 Development Tools
 Postman: Used for creating products (only by the admin).
+
 Additional Information
 All products and details were uploaded by the admin using Postman. Users cannot add new products due to the admin authentication middleware.
 
 Installation
 Clone the repository:
-
-bash
-Copia
-Modifica
 git clone <repository-url>
+
 Install dependencies:
-
-bash
-Copia
-Modifica
 npm install
-Configure environment variables for:
 
+Configure environment variables for:
 MongoDB
 SendGrid
 Cloudinary
+
 Run the project:
-
-bash
-Copia
-
-Modifica
 npm run dev
 
 Credits
