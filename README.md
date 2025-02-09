@@ -1,104 +1,110 @@
-ROBOT-LIFE LINK: https://robot-life-frontend.vercel.app/
+ROBOT-LIFE E-Commerce - README
+Frontend LINK: https://robot-life-frontend.vercel.app/
+Frontend GitHub LINK: https://github.com/Uros0396/ROBOT-LIFE-FRONTEND
 
-# Ecommerce Robotica - README
-LINK FRONTEND: https://github.com/Uros0396/ROBOT-LIFE-FRONTEND
-## Descrizione del Progetto
-Questo progetto è un ecommerce dedicato alla vendita online di robot, stampanti 3D e accessori per la robotica. 
-Il sito prevede due tipi di utenti:
-- **Admin**: solo l'admin (io) può gestire i prodotti.
-- **User**: gli utenti possono registrarsi o effettuare il login per accedere ai dettagli dei prodotti, completare gli acquisti e lasciare commenti ai prodotti.
+Project Description
+This project is an e-commerce platform dedicated to the online sale of robots, 3D printers, and robotics accessories.
+The website features two types of users:
 
-### Funzionalità Principali
-- **Accesso Utente**: 
-  - Possibilità di login tradizionale o tramite Google.
-  - Gestione della sessione utente basata su token JWT tramite l'hook `useSession`.
+Admin: Only the admin (me) can manage the products.
+User: Users can register or log in to access product details, complete purchases, and leave product comments.
+Main Features
+User Login:
 
-- **Prodotti e Dettagli**:
-  - Gli utenti devono essere registrati per accedere ai dettagli dei prodotti.
-  - Implementazione di `ProtectedRoutes` per proteggere le pagine *Details* e il componente *Cart*.
+Traditional login or login via Google.
+User session management based on JWT token using the useSession hook.
+Products and Details:
 
-- **Ricerca Prodotti**:
-  - Campo di ricerca nella navbar della homepage.
-  - Risultati visibili in fondo alla homepage, visualizzati nel componente `MainComponent`.
+Users must be registered to access product details.
+Implementation of ProtectedRoutes to protect the Details page and the Cart component.
+Product Search:
 
-- **Carrello**:
-  - Gestito tramite `cartSlice` in Redux.
-  - Middleware `validationPayment` per validare i pagamenti.
-  - Notifiche con SweetAlert per confermare aggiunte al carrello.
+A search field in the navbar of the homepage.
+Search results are displayed at the bottom of the homepage within the MainComponent.
+Shopping Cart:
 
-- **Commenti**:
-  - Gli utenti possono inviare commenti sui prodotti nella pagina *Details*.
-  - `commentSlice` gestisce la logica per l'invio (`POST`) e la visualizzazione (`GET`) dei commenti tramite il componente `CommentForm`.
+Managed using cartSlice in Redux.
+validationPayment middleware to validate payments.
+SweetAlert notifications to confirm items added to the cart.
+Comments:
 
-- **Messaggi di Supporto**:
-  - Integrazione di SendGrid per consentire agli utenti di inviare messaggi nel caso di prodotti guasti tramite il componente `ContactForm`.
+Users can leave comments on products on the Details page.
+commentSlice handles the logic for submitting (POST) and displaying (GET) comments via the CommentForm component.
+Support Messages:
 
-### Tecnologie Utilizzate
-#### Frontend:
-- **Librerie e Framework**:
-  - React
-  - Redux
-  - SweetAlert
-  - Bootstrap
-  - CSS
-  - Stripe
+SendGrid integration allows users to send messages in case of defective products via the ContactForm component.
+Technologies Used
+Frontend:
+Libraries & Frameworks:
 
-- **Gestione Stato**:
-  - Redux con i reducer:
-    - `getProductReducer` per ottenere i prodotti (usato in *CategoryPages*).
-    - `cartSlice` per il carrello.
-    - `commentSlice` per i commenti.
+React
+Redux
+SweetAlert
+Bootstrap
+CSS
+Stripe
+State Management:
 
-#### Backend:
-- **Tecnologie**:
-  - Node.js
-  - Express
-  - MongoDB
-  - Cloudinary per la gestione delle immagini
-  - SendGrid
-  - Stripe
+Redux with the following reducers:
+getProductReducer for fetching products (used in CategoryPages).
+cartSlice for managing the shopping cart.
+commentSlice for managing comments.
+Backend:
+Technologies:
 
-- **Modelli**:
-  - `Product`, `User`, `Order`, `Comment`.
+Node.js
+Express
+MongoDB
+Cloudinary for image management
+SendGrid
+Stripe
+Models:
 
-- **Rotte**:
-  - Login
-  - Google
-  - Comments
-  - Order
-  - Products
-  - SendGrid
-  - User
+Product, User, Order, Comment.
+Routes:
 
-- **Middleware**:
-  - 8 middleware, inclusi:
-    - `authAdminMiddleware` per autorizzare solo l'admin alla creazione di nuovi prodotti.
-    - `validationPayment` per gestire la validazione dei pagamenti.
+Login
+Google
+Comments
+Order
+Products
+SendGrid
+User
+Middleware:
 
-#### Strumenti di Sviluppo
-- Postman: utilizzato per creare i prodotti (solo dall'admin).
+8 middleware functions, including:
+authAdminMiddleware to authorize only the admin to create new products.
+validationPayment to manage payment validation.
+Development Tools
+Postman: Used for creating products (only by the admin).
+Additional Information
+All products and details were uploaded by the admin using Postman. Users cannot add new products due to the admin authentication middleware.
 
-### Altre Informazioni
-Tutti i prodotti e i dettagli sono stati caricati dall'admin tramite Postman. Gli utenti non possono aggiungere nuovi prodotti grazie al middleware di autenticazione per admin.
+Installation
+Clone the repository:
 
-### Installazione
-1. Clona il repository:
-   ```bash
-   git clone <repository-url>
-   ```
-2. Installa le dipendenze:
-   ```bash
-   npm install
-   ```
-3. Configura le variabili d'ambiente per:
-   - MongoDB
-   - SendGrid
-   - Cloudinary
+bash
+Copia
+Modifica
+git clone <repository-url>
+Install dependencies:
 
-4. Avvia il progetto:
-   ```bash
-   npm run start
-   ```
+bash
+Copia
+Modifica
+npm install
+Configure environment variables for:
 
-### Crediti
-Progetto sviluppato da Uros Milenkovic.
+MongoDB
+SendGrid
+Cloudinary
+Run the project:
+
+bash
+Copia
+Modifica
+npm run dev
+Credits
+Project developed by Uros Milenkovic.
+
+
